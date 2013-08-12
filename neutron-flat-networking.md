@@ -1,4 +1,20 @@
 ## Introduction ##
 
-This guide walks the user through creating *flat* networks in Openstack (Grizzly) with the Quantum/Neutron networking model. Throughout the guide, Quantum and Neutron may be used interchangeably.
+This guide walks the user through creating a *flat* network within Quantum/Neutron in Openstack (Grizzly). Throughout the guide, Quantum and Neutron may be used interchangeably.
+
+## Before You Start ##
+
+This walkthrough assumes that the networking infrastructure is in place and that the nodes are reachable from an outside host. Configuration examples of the gear below will be provided.
+
+The lab I am using is composed of the following gear:
+
+* One controller node (Dell R710)
+* One compute node (Dell R710)
+* Gateway device (Cisco ASA 5510)
+* Switch (Cisco 2960S)
+* Openstack (Grizzly) has been installed on Controller and Compute nodes.
+
+
+
+
 
