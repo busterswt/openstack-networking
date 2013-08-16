@@ -63,6 +63,8 @@ The former allows for the use of a single interface on the nodes. The IP of the 
 
 #### Interface Configuration ####
 
+A bridge must be created on the controller and compute node(s).
+
 Below is what a default eth0 configuration might look like:
 
 ```
@@ -91,8 +93,41 @@ iface br-eth0 inet static
 
 *NOTE: Do not set br-eth0 to auto. Due to the order of which process at started at boot, this must be accomplished in rc.local.*
 
+#### Openvswitch Configuration ####
 
+Now it's time to create the bridge in OVS. The following commands will create a bridge called 'br-eth0' and place eth0 inside:
 
+```
+ovs-vsctl add-br br-eth0
+ovs-vsctl add-port br-eth0 eth0
+```
+
+#### Changed to Environment json ####
+
+A few changes must be made to the environment file in order to utilize the bridge for Neutron networking.
+
+```
+knife environment edit rpcs
+```
+
+Look for the section 'quantum : ovs : provider_networks'
+
+```
+"quantum": {
+      "ovs": {
+        "provider_networks":
+```
+
+The bridge configuration should be modified to mirror that below, if it doesn't already exist:
+
+```
+{
+   "label": "ph-eth0",
+   "bridge": "br-eth0",
+   "vlans": "4092:4092"
+}
+
+*The vlan(s) listed above are arbitrary and won't be used in this example *
 
 
 
