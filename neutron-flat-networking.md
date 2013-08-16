@@ -31,7 +31,9 @@ For the purpose of this walkthrough, I'll be focusing on **flat** provider netwo
 
 ## Diagram ##
 
-![](http://i.imgur.com/w2aHgDP.png)
+The diagram below reflects an environment with a single L2 vlan and an L3 network connecting the firewall (gateway) to the servers.
+
+![](http://i.imgur.com/9SNsxOr.png)
 
 
 
