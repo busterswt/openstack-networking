@@ -93,6 +93,15 @@ iface br-eth0 inet static
 
 *NOTE: Do not set br-eth0 to auto. Due to the order of which process at started at boot, this must be accomplished in rc.local.*
 
+Edit the /etc/rc.local file of each machine and add the following line before the 'exit' statement:
+
+```
+ifup br-eth0
+exit 0
+```
+
+This will ensure the interface is brought up at the appropriate time during boot.
+
 #### Openvswitch Configuration ####
 
 Now it's time to create the bridge in OVS. The following commands will create a bridge called 'br-eth0' and place eth0 inside:
@@ -126,10 +135,13 @@ The bridge configuration should be modified to mirror that below, if it doesn't 
    "bridge": "br-eth0",
    "vlans": "4092:4092"
 }
+```
 
 *The vlan(s) listed above are arbitrary and won't be used in this example *
 
+#### Implement the network changes ####
 
+Once the bridge has been configure on the controller and compute nodes, run 'chef-client' to distribute the Neutron configuration changes.
 
 
 
