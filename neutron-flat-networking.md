@@ -14,6 +14,8 @@ The lab I am using is composed of the following gear:
 * Switch (Cisco 2960S)
 * Openstack (Grizzly) has been installed on Controller and Compute nodes.
 
+## About the Network ##
+
 
 
 
