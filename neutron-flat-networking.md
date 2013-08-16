@@ -1,6 +1,6 @@
 ## Introduction ##
 
-This guide walks the user through creating a *flat* network within Quantum/Neutron in Openstack (Grizzly). Throughout the guide, Quantum and Neutron may be used interchangeably.
+This guide walks the user through creating a **flat** network within Quantum/Neutron in Openstack (Grizzly). Throughout the guide, Quantum and Neutron may be used interchangeably.
 
 ## Before You Start ##
 
@@ -15,6 +15,25 @@ The lab I am using is composed of the following gear:
 * Openstack (Grizzly) has been installed on Controller and Compute nodes.
 
 ## About the Network ##
+
+It might help to take a step back here and describe the various types of networks you can create within Neutron.
+
+First, there are two major categories of networks:
+
+- Provider Networks
+- Tenant Networks
+
+**Provider Networks** are networks usually created by the OpenStack administrator to map directly to an existing physical network in a data center. Useful network types in this category are **flat** (untagged) and **vlan** (tagged). Provider networks can be configured to be shared amongst tenants.
+
+**Tenant Networks** are networks created by users within tenants/projects. Useful network types in this category are **vlan** (tagged) and **gre** (unique id). 
+
+For the purpose of this walkthrough, I'll be focusing on **flat** provider networks to provide connectivity to instances.
+
+## Diagram ##
+
+![](http://i.imgur.com/w2aHgDP.png)
+
+
 
 
 
