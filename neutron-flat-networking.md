@@ -111,7 +111,7 @@ ovs-vsctl add-br br-eth0
 ovs-vsctl add-port br-eth0 eth0
 ```
 
-#### Changed to Environment json ####
+#### Changes to Environment json ####
 
 A few changes must be made to the environment file in order to utilize the bridge for Neutron networking.
 
@@ -141,7 +141,21 @@ The bridge configuration should be modified to mirror that below, if it doesn't 
 
 #### Implement the network changes ####
 
-Once the bridge has been configure on the controller and compute nodes, run 'chef-client' to distribute the Neutron configuration changes.
+Once the bridge has been configured on the controller and compute nodes, run 'chef-client' on all nodes to distribute the Neutron configuration changes. If everything is successful, you should see OVS output similar to this for br-eth0:
+
+```
+root@controller01:~# ovs-vsctl show
+
+Bridge "br-eth0"
+        Port "br-eth0"
+            Interface "br-eth0"
+                type: internal
+        Port "phy-br-eth0"
+            Interface "phy-br-eth0"
+        Port "eth0"
+            Interface "eth0"
+```
+
 
 
 
