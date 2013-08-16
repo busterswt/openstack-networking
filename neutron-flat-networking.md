@@ -8,11 +8,13 @@ This walkthrough assumes that the networking infrastructure is in place and that
 
 The lab I am using is composed of the following gear:
 
-* One controller node (Dell R710)
-* One compute node (Dell R710)
+* One controller node (Dell R710 w/ Ubuntu 12.04 LTS)
+* One compute node (Dell R710 w/ Ubuntu 12.04 LTS)
 * Gateway device (Cisco ASA 5510)
 * Switch (Cisco 2960S)
 * Openstack (Grizzly) has been installed on Controller and Compute nodes.
+
+Configure all appropriate IPs on the hosts to get connectivity working as expected. 
 
 ## About the Network ##
 
@@ -34,6 +36,61 @@ For the purpose of this walkthrough, I'll be focusing on **flat** provider netwo
 The diagram below reflects an environment with a single L2 vlan and an L3 network connecting the firewall (gateway) to the servers.
 
 ![](http://i.imgur.com/9SNsxOr.png)
+
+## Configuration ##
+
+### Firewall Configuration ###
+
+The firewall configuration is pretty straightforward. Interface e0/1 must be configured with the gateway address:
+
+```
+interface Ethernet0/1
+ speed 100
+ duplex full
+ nameif mgmt
+ security-level 100
+ ip address 10.240.0.1 255.255.255.0
+```
+
+### Server Configuration ###
+
+Right now, your servers likely have their IP configured directly on eth0. In order to utilize Neutron, the hosts must have a network bridge configured. This can be accomplished one of two ways:
+
+- Configure eth0 as the bridge
+- Configure another interface as the bridge
+
+The former allows for the use of a single interface on the nodes. The IP of the machine would move from eth0 to the bridge interface. For this example, we'll use a single interface.
+
+#### Interface Configuration ####
+
+Below is what a default eth0 configuration might look like:
+
+```
+auto eth0
+iface eth0 inet static
+	address 10.240.0.10
+	netmask 255.255.255.0
+	gateway 10.240.0.1
+	nameserver 8.8.8.8
+```
+
+In order to configure the bridge, eth0 must be modified and the bridge interface created:
+
+```
+auto eth0
+iface eth0 inet manual
+	up ip l s $IFACE up
+	down ip l s $IFACE down
+	
+iface br-eth0 inet static
+	address 10.240.0.10
+	netmask 255.255.255.0
+	gateway 10.240.0.1
+	nameserver 8.8.8.8
+```
+
+*NOTE: Do not set br-eth0 to auto. Due to the order of which process at started at boot, this must be accomplished in rc.local.*
+
 
 
 
