@@ -1,6 +1,6 @@
 ###Neutron Networking: The Building Blocks of an OpenStack Cloud###
 
-In this multi-part blog series, I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of multiple networking configurations for clouds built with Rackspace Private Cloud powered by OpenStack on Ubuntu 12.04 LTS. When possible, I’ll provide configuration file examples for those following along on an install from source.
+In this multi-part walkthrough series, I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of multiple networking configurations for clouds built with Rackspace Private Cloud powered by OpenStack on Ubuntu 12.04 LTS. When possible, I’ll provide configuration file examples for those following along on an install from source.
 
 In this first installment, I’ll briefly highlight Neutron features and terminology that will be useful for later installments. Future installments will include VLAN-based provider/tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more.
 
