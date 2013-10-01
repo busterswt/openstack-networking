@@ -51,4 +51,4 @@ Diagram represents a simple Neutron networking configuration that utilizes a tag
 There’s so much more to Neutron than what’s been covered here, but the foundation has been laid for building simple networks for instance connectivity. With some basic configuration of physical network devices, and a little API magic, one can build a functioning cloud based on [Rackspace Private Cloud](http://www.rackspace.com/cloud/private/) powered by [OpenStack](http://www.openstack.org).
 
 
-_Have questions or comments? Feel free to contact me on Twitter - @jimmdenton_
+_Have questions or comments? Feel free to contact or follow me on Twitter - [@jimmdenton](https://twitter.com/jimmdenton)_
