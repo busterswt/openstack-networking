@@ -44,7 +44,7 @@ Either network type (provider/tenant) can be used to provide connectivity to/fro
 
 ![Sample Neutron Physical Network](http://i.imgur.com/JfIkzIS.png "Sample Neutron Physical Network")
 
-Diagram represents a simple Neutron networking configuration that utilizes a tagged provider network for connectivity to the Internet, as well as two isolated GRE-based tenant networks for private communication between instances.
+_The diagram above represents a simple Neutron networking configuration that utilizes a tagged provider network for connectivity to the Internet, as well as two isolated GRE-based tenant networks for private communication between instances._
 
 ####Summary####
 
