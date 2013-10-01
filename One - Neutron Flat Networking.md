@@ -410,4 +410,4 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 
 With a limited amount of networking hardware one can create a functional private cloud based on Rackspace Private Cloud powered by OpenStack. While the flat network model provides basic connectivity, it is best used in cases where scalability is not a concern, or where switches may be unmanageable. 
 
-_Have questions or comments? Feel free to contact me on Twitter - @jimmdenton_
+_Have questions or comments? Feel free to contact or follow me on Twitter - [@jimmdenton](https://twitter.com/jimmdenton)_
