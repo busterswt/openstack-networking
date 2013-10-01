@@ -26,8 +26,6 @@ Thanks to its pluggable infrastructure, third-party and community developers can
 Open vSwitch is an open source virtual switch that is highly utilized by Neutron. It can operate both as a soft switch running within the hypervisor, and as the control stack for physical switching devices. 
 For OpenStack, Open vSwitch is installed as a kernel module or process. Much like a physical switch, Open vSwitch is responsible for the proper tagging and forwarding of traffic based on OVS port configuration. Aside from building the initial bridge(s), Neutron handles most all other interaction with OVS via the Open vSwitch plugin. It is possible, though beyond the scope of this article, to manipulate OVS outside of Neutron for further networking requirements.
 
-The Open vSwitch plugin is loaded at runtime by the Neutron service, and processes all API calls and stores the resulting logical network data and mappings into a database backend. An agent runs on each node (controller/compute), and gathers the configuration and mappings from the database in order to configure flows on the respective local Open vSwitch instance. 
-
 
 ####Basic Connectivity / Provider and Tenant Networks####
 
