@@ -4,7 +4,7 @@ In this multi-part blog series, I intend to dive into the various components of 
 
 In this first installment, I’ll briefly highlight Neutron features and terminology that will be useful for later installments. Future installments will include VLAN-based provider/tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more.
 
-New to OpenStack? Rackspace offers a complete open-source package, [Rackspace Private Cloud Software](http://www.rackspace.com/cloud/private/), that you're welcome to use at no cost. Download and follow along.
+_New to OpenStack? Rackspace offers a complete open-source package, [Rackspace Private Cloud Software](http://www.rackspace.com/cloud/private/), that you're welcome to use at no cost. Download and follow along._
 
 
 ####Getting Started / What is Neutron?####
@@ -44,13 +44,13 @@ Either network type (provider/tenant) can be used to provide connectivity to/fro
 
 ***Tenant networks*** are networks created by users within tenants, or groups of users. By default, networks created with tenants are not shared amongst other tenants. Useful network types in this category are ***vlan*** (802.1q tagged) and ***gre*** (unique id). With the use of the L3 agent and Neutron routers, it is possible to route between GRE-based tenant networks. Without a Neutron router, these networks are effectively isolated from each other (and everything else, for that matter).
 
-<picture>
+![Sample Neutron Physical Network](http://i.imgur.com/JfIkzIS.png "Sample Neutron Physical Network")
 
 Diagram represents a simple Neutron networking configuration that utilizes a tagged provider network for connectivity to the Internet, as well as two isolated GRE-based tenant networks for private communication between instances.
 
 ####Summary####
 
-There’s so much more to Neutron than what’s been covered here, but the foundation has been laid for building simple networks for instance connectivity. With some basic configuration of physical network devices, and a little API magic, one can build a functioning cloud based on Rackspace Private Cloud powered by OpenStack.
+There’s so much more to Neutron than what’s been covered here, but the foundation has been laid for building simple networks for instance connectivity. With some basic configuration of physical network devices, and a little API magic, one can build a functioning cloud based on [Rackspace Private Cloud](http://www.rackspace.com/cloud/private/) powered by [OpenStack](http://www.openstack.org).
 
 
-Have questions or comments? Feel free to contact me on Twitter - @jimmdenton. 
+_Have questions or comments? Feel free to contact me on Twitter - @jimmdenton_
