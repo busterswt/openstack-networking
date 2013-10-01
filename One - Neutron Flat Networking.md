@@ -1,8 +1,10 @@
 ###Neutron Networking: Simple Flat Network###
 
-_In this multi-part walkthrough series, I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of multiple networking configurations for clouds built with Rackspace Private Cloud powered by OpenStack on Ubuntu 12.04 LTS. When possible, I’ll provide configuration file examples for those following along on an install from source._
+In this multi-part walkthrough series, I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of multiple networking configurations for clouds built with Rackspace Private Cloud powered by OpenStack on Ubuntu 12.04 LTS. When possible, I’ll provide configuration file examples for those following along on an install from source.
 
-_In the previous installment, Neutron Networking: The Building Blocks of an OpenStack Cloud, I laid out the foundation of the Neutron networking model that included important terminology, a brief description of services and capabilities, and a sample diagram. In this second installment, I’ll dive into how to build a simple flat network consisting of a few servers and limited networking gear. Future installments will include VLAN-based provider/tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more._
+In the previous installment, [Neutron Networking: The Building Blocks of an OpenStack Cloud](https://github.com/busterswt/openstack-networking/blob/master/Intro%20-%20Building%20Blocks.md), I laid out the foundation of the Neutron networking model that included important terminology, a brief description of services and capabilities, and a sample diagram. In this second installment, I’ll dive into how to build a simple flat network consisting of a few servers and limited networking gear. Future installments will include VLAN-based provider/tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more.
+
+_New to OpenStack? Rackspace offers a complete open-source package, [Rackspace Private Cloud Software](http://www.rackspace.com/cloud/private/), that you're welcome to use at no cost. Download and follow along._
 
 ####Getting Started / What is a flat network?####
 
