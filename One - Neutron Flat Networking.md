@@ -8,7 +8,7 @@ _New to OpenStack? Rackspace offers a complete open-source package, [Rackspace P
 
 ####Getting Started / What is a flat network?####
 
-For those coming from previous Rackspace Private Cloud installations (Essex/Folsom), flat networking in Neutron resembles the Flat DHCP model in Nova networking. For those new to the game, a flat network is one in which all instances reside on the same network (which may also be shared by the hosts). No vlan tagging takes place, and Neutron handles the assignment of IPs to instances using DHCP. Therefore, it’s possible to use unmanaged SOHO network switches to build a simple Neutron-based cloud, since there’s no need to configure switchports.
+For those coming from previous Essex- or Folsom-based Rackspace Private Cloud installations, flat networking in Neutron resembles the Flat DHCP model in Nova networking. For those new to the game, a flat network is one in which all instances reside on the same network (which may also be shared by the hosts). No vlan tagging takes place, and Neutron handles the assignment of IPs to instances using DHCP. Therefore, it’s possible to use unmanaged SOHO network switches to build a simple Neutron-based cloud, since there’s no need to configure switchports.
 
 ![](http://i.imgur.com/C7uzjps.png "Sample Flat Network")
 
