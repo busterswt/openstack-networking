@@ -93,7 +93,7 @@ The creation and configuration of the bridge enables the instances to communicat
 
 #####Changes to Environment (RPC v4)#####
 
-When using RPC v4, most configuration changes are handled via Chef. A few changes must be made to the environment file in order to utilize the bridge for Neutron networking.
+When using RPC v4, most configuration changes are handled via Chef. A few changes must be made to the environment file to utilize the bridge for Neutron networking.
 
 ```
 knife environment edit grizzly 
@@ -107,7 +107,7 @@ Look for the section 'quantum : ovs : provider_networks'
     "provider_networks": 
 ```
 
-The bridge configuration should be modified to mirror that below, if it doesn't already exist:
+The bridge configuration should be modified to mirror the following example, if it doesn't already exist:
 
 ```
 {    
@@ -170,7 +170,7 @@ Save the changes to the file and run chef-client on all the hosts to populate th
 
 #####Changes to Environment (Other)#####
 
-When using something other than RPC v4 (such as source), configuration changes must be made to the appropriate configuration files and services restarted manually.
+When using something other than RPC v4 (such as the OpenStack source), configuration changes must be made to the appropriate configuration files and services restarted manually.
 
 Within /etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini, update the following values:
 
@@ -185,7 +185,7 @@ network_vlan_ranges = ph-eth0:1:1
 bridge_mappings = ph-eth0:br-eth0
 ````
 
-The label ‘ph-eth0’ represents our provider interface, in this case the bridge ‘br-eth0’. It will be used during the creation of networks in Neutron. It’s possible to have more than one provider bridge, especially when you have multiple switching infrastructures for various networks and services. Restart all quantum and openvswitch services on all hosts for the changes to take effect. 
+The label ‘ph-eth0’ represents our provider interface, in this case the bridge ‘br-eth0’. It will be used during the creation of networks in Neutron. It’s possible to have more than one provider bridge, especially when you have multiple switching infrastructures for various networks and services. Restart all Neutron and Open vSwitch services on all hosts for the changes to take effect. 
 
 ####Networking / OVS Confirmation####
 
@@ -217,7 +217,7 @@ For those installing from source, the name of the bridge is defined in /etc/quan
 integration_bridge = br-int
 ````
 
-The bridge will need to be created manually in OVS if one is not using Chef:
+The bridge will need to be created manually in OVS if you are not using Chef:
 
 ````
 ovs-vsctl add-br br-int
@@ -225,7 +225,7 @@ ovs-vsctl add-br br-int
 
 ####Networking / Building a flat provider network in Neutron####
 
-Now that the infrastructure is in place and the bridges are configured, it’s time to proceed with the building of a flat provider network in Neutron. Creating a flat provider network requires only two values: the name of the network and the provider bridge label. There are additional flags that can be specified, but these aren’t required for basic connectivity.
+Now that the infrastructure is in place and the bridges are configured, it’s time to build a flat provider network in Neutron. Creating a flat provider network requires only two values: the name of the network and the provider bridge label. There are additional flags that can be specified, but these aren’t required for basic connectivity.
 
 
 Syntax: ````quantum net-create --provider:physical_network=<provider label> --provider:network_type=flat <network name>````
@@ -259,7 +259,7 @@ quantum subnet-create <network_name> <subnet>  --name <subnet_name> --no-gateway
 start=<dhcp_start_ip>,end=<dhcp_end_ip> --dns-nameservers list=true <dhcp_ip_1> <dhcp_ip_2>
 ````
 
-It’s a good idea to provide at least the following options:
+It’s a good idea to provide values for the following options:
 
 - ```--no-gateway```		Instructs Quantum not to provide a gateway IP.
 - ```--host-route```		Provides route injection via DHCP. 
@@ -397,7 +397,7 @@ Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 169.254.169.254 10.240.0.231    255.255.255.255 UGH       0 0          0 eth0
 ````
 
-Pinging an external IP should reveal good results so long as a static NAT or PAT exists on the external gateway device:
+Pinging an external IP should reveal positive results as long as a static NAT or PAT exists on the external gateway device and the traffic is permitted:
 
 ````
 root@my-instance-1:~# ping 8.8.8.8
@@ -411,4 +411,4 @@ PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 
 With a limited amount of networking hardware one can create a functional private cloud based on Rackspace Private Cloud powered by OpenStack. While the flat network model provides basic connectivity, it is best used in cases where scalability is not a concern, or where switches may be unmanageable. 
 
-_Have questions or comments? Feel free to contact or follow me on Twitter - [@jimmdenton](https://twitter.com/jimmdenton)_
+_Have questions or comments? Feel free to contact or follow me on Twitter [@jimmdenton](https://twitter.com/jimmdenton)_
