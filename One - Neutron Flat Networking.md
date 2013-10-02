@@ -137,8 +137,7 @@ The resulting file would look something like this:
   "override_attributes": {
     "nova": {
       "network": {
-        "provider": "quantum",
-        "network_type": "gre"
+        "provider": "quantum"
       }
     },
     "quantum": {
