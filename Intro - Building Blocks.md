@@ -11,7 +11,7 @@ _New to OpenStack? Rackspace offers a complete open-source package, [Rackspace P
 
 Search the internet for “Quantum Networking” and you’re bound to be overwhelmed with articles on the building blocks of our universe rather than the building blocks of OpenStack. The recent name change from Quantum to Neutron makes should make things a little easier to find, but it’s clear that the community is in dire need of real-world networking examples.
 
-Before we can dig into the configuration of Neutron, it’s important to understand what it is and how it interacts with the rest of the Openstack architecture. Neutron is the ***networking component*** of OpenStack, and is a standalone service alongside other services such as Nova (Compute), Glance (Image), Keystone (authentication), and Horizon (Dashboard). Like those services, the deployment of Neutron involves deploying of several processes on each host.
+Before we can dig into the configuration of Neutron, it’s important to understand what it is and how it interacts with the rest of the OpenStack architecture. Neutron is the ***networking component*** of OpenStack, and is a standalone service alongside other services such as Nova (Compute), Glance (Image), Keystone (authentication), and Horizon (Dashboard). Like those services, the deployment of Neutron involves deploying several processes on each host.
 
 - Neutron relies on Keystone for authentication and authorization of all API requests.
 
@@ -23,8 +23,13 @@ Thanks to its pluggable infrastructure, third-party and community developers can
 
 ####Open vSwitch / How does it fit in?####
 
-Open vSwitch is an open source virtual switch that is highly utilized by Neutron. It can operate both as a soft switch running within the hypervisor, and as the control stack for physical switching devices. 
-For OpenStack, Open vSwitch is installed as a kernel module or process. Much like a physical switch, Open vSwitch is responsible for the proper tagging and forwarding of traffic based on OVS port configuration. Aside from building the initial bridge(s), Neutron handles most all other interaction with OVS via the Open vSwitch plugin. It is possible, though beyond the scope of this article, to manipulate OVS outside of Neutron for further networking requirements.
+Open vSwitch is an open source, software-based virtual switch that is utilized by Neutron. It can operate both as a soft switch running within the hypervisor, and as the control stack for physical switching devices. The Neutron openvswitch plugin consists of two components:
+
+- A ***plugin*** loaded at runtime by the Neutron service. The plugin processes API calls and stores the resulting logical network data and mappings in a database backend.
+
+- An ***agent*** that runs on each compute node. This agent gathers the configuration and mappings from the central database and communicates with the local Open vSwitch instance to configure flows and implement the network based on the logical data model.
+
+For OpenStack, Open vSwitch is installed as a kernel module or userspace-only process. Much like a physical switch, Open vSwitch is responsible for the proper tagging and forwarding of traffic based on OVS port configuration. Aside from building the initial bridge(s), Neutron handles most all other interaction with OVS via the openvswitch plugin. It is possible to manipulate OVS outside of Neutron for further networking requirements, but these scenarios are outside the scope of this article.
 
 
 ####Basic Connectivity / Provider and Tenant Networks####
