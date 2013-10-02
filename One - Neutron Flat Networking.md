@@ -2,7 +2,7 @@
 
 In this multi-part walkthrough series, I intend to dive into the various components of the OpenStack Neutron project, and to also provide working examples of multiple networking configurations for clouds built with Rackspace Private Cloud powered by OpenStack on Ubuntu 12.04 LTS. When possible, I’ll provide configuration file examples for those following along on an install from source.
 
-In the previous installment, [Neutron Networking: The Building Blocks of an OpenStack Cloud](https://github.com/busterswt/openstack-networking/blob/master/Intro%20-%20Building%20Blocks.md), I laid out the foundation of the Neutron networking model that included important terminology, a brief description of services and capabilities, and a sample diagram. In this second installment, I’ll dive into how to build a simple flat network consisting of a few servers and limited networking gear. Future installments will include VLAN-based provider/tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more.
+In the previous installment, [Neutron Networking: The Building Blocks of an OpenStack Cloud](https://github.com/busterswt/openstack-networking/blob/master/Intro%20-%20Building%20Blocks.md), I laid the foundation of the Neutron networking model that included terminology, concepts, and a brief description of services and capabilities. In this second installment, I’ll describe how to build a simple flat network consisting of a few servers and limited networking gear. Future installments will include VLAN-based provider and tenant networks, GRE-based tenant networks, Open vSwitch troubleshooting, and more.
 
 _New to OpenStack? Rackspace offers a complete open-source package, [Rackspace Private Cloud Software](http://www.rackspace.com/cloud/private/), that you're welcome to use at no cost. Download and follow along._
 
@@ -17,7 +17,7 @@ _The diagram above represents a simple Neutron networking configuration that uti
 
 ####Networking / Layout####
 
-In the following diagram, a Cisco ASA 5510 is serving as the lead gateway device, with a Cisco 2960G access switch connecting the firewall and servers together via VLAN 1. 10.240.0.0/24 was chosen as the management network for hosts, but will also serve as a provider network for instances. We’ll be utilizing a single interface on the servers for both management and provider network connectivity.
+In the following diagram, a Cisco ASA 5510 is serving as the lead gateway device, with a Cisco 2960G access switch connecting the firewall and servers together via VLAN 1. 10.240.0.0/24 was chosen as the management network for hosts, but will also serve as a provider network for instances. We’ll be using a single interface on the servers for both management and provider network connectivity.
 
 ![](http://i.imgur.com/iogcVgo.png "Sample Flat Layout")
 
@@ -37,12 +37,13 @@ interface Ethernet0/1
 ```
 
 Depending on the model of switch, your switchports may be unmanaged or in vlan 1 by default. With the flat networking model, your gateway and hosts must simply sit in the same vlan or broadcast domain; the vlan ID itself is irrelevant.
-There’s a good chance your servers have their IP configured directly on eth0. In order to utilize Neutron, the hosts must have a network bridge configured. This can be accomplished one of two ways:
+There’s a good chance your servers have their IP configured directly on eth0. To utilize Neutron, the hosts must have a network bridge configured. This can be accomplished one of two ways:
 
 -	Configure a bridge containing eth0
 -	Configure a bridge containing another interface
 
-The first option allows for the use of a single interface on the nodes. There are plenty of cases where one may prefer to use other interfaces or configure multiple bridges, however. For this example, I’ll use a single interface and move the IP from eth0 to the bridge.
+The first option enables you to use a single interface on the nodes. However, there are plenty of cases where you may prefer to use other interfaces or configure multiple bridges. For this example, I’ll use a single interface and move the IP address from eth0 to the bridge.
+
 Below is what a default eth0 configuration might look like:
 
 ```
@@ -69,7 +70,7 @@ iface br-eth0 inet static
   nameserver 8.8.8.8
 ```
 
-_TIP: Do not set br-eth0 to auto. Due to the order that processes are started at boot, this must be accomplished in rc.local. Instead, edit the /etc/rc.local file of each machine and add the following line before the 'exit' statement:_
+_TIP: Do not set br-eth0 to auto. Because of the order that processes are started at boot, the interface must be brought up using rc.local. Instead, edit the /etc/rc.local file of each machine and add the following line before the 'exit' statement:_
 
 ```
 ifup br-eth0 
@@ -88,7 +89,7 @@ ovs-vsctl add-br br-eth0
 ovs-vsctl add-port br-eth0 eth0
 ```
 
-The creation of the bridge (and subsequent configuration) is what allows the instances to communicate on the network.
+The creation and configuration of the bridge enables the instances to communicate on the network.
 
 #####Changes to Environment (RPC v4)#####
 
