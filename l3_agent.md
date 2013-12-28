@@ -80,7 +80,7 @@ For this installment, a Cisco ASA 5510 will once again serve as the lead gateway
 
 A single interface on the servers will be used for both management and provider network connectivity. Neutron works with Open vSwitch to build peer-to-peer tunnels between hosts that serve to carry encapsulated *tenant* network traffic. 
 
-![](http://i.imgur.com/9SNsxOr.png "Diagram 1.2")
+![](http://i.imgur.com/t8S4TDq.png "Diagram 1.2")
 
 
 ####Networking / L3 Agent Configuration
